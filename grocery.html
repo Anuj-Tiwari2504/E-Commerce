@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grocery - DesiMart | Organic & Traditional Food</title>
+    <meta name="description" content="Shop organic spices, grains, oils and traditional Indian grocery items at DesiMart.">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar" style="position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; transition: all 0.3s ease; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);">
+        <div class="nav-container">
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="fashion.html" class="nav-link">Fashion</a>
+                <a href="grocery.html" class="nav-link active">Grocery</a>
+                <a href="electronics.html" class="nav-link">Electronics</a>
+                <a href="handicraft.html" class="nav-link">Handicraft</a>
+                
+                <div class="mobile-social-section">
+                    <div class="mobile-contact-info">
+                        <p><i class="fas fa-phone"></i> +91 1800-123-4567</p>
+                        <p><i class="fas fa-envelope"></i> support@desimart.com</p>
+                    </div>
+                    <div class="mobile-social-icons">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="nav-logo">
+                <a href="index.html" class="logo-link">
+                    <span class="logo-icon">🛒</span>
+                    <div class="logo-text">
+                        <h1>DesiMart</h1>
+                        <span class="logo-tagline">Har Ghar Ki Desi Pehchaan</span>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="nav-icons">
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Search products..." onkeyup="searchProducts(event)">
+                    <button class="search-btn" onclick="performSearch()">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <button class="nav-icon" onclick="toggleWishlist()">
+                    <i class="fas fa-heart"></i>
+                    <span class="badge" id="wishlistCount">0</span>
+                </button>
+                <button class="nav-icon" onclick="toggleCart()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="badge" id="cartCount">0</span>
+                </button>
+                <button class="nav-icon" onclick="toggleAccount()">
+                    <i class="fas fa-user"></i>
+                </button>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Grocery Header -->
+    <section class="page-header" style="position: relative; min-height: 78vh; display: flex; align-items: center; overflow: hidden; background: #000; margin-top: 70px;">
+        <img src="images/grocery-banner.jpg" alt="Grocery & Essentials" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; z-index: 1; image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges; filter: contrast(1.05) brightness(1.02);">
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(19,136,8,0.5), rgba(139,69,19,0.4)); z-index: 2;"></div>
+        <div class="container" style="position: relative; z-index: 3; text-align: center;">
+            <h1 style="font-size: 4.3rem; font-weight: 700; margin-bottom: 1.5rem; text-shadow: 3px 3px 6px rgba(0,0,0,0.8); letter-spacing: 1px;">🛒 Grocery & Essentials</h1>
+            <p style="font-size: 1.7rem; margin-bottom: 3rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.7); font-weight: 300; max-width: 650px; margin-left: auto; margin-right: auto;">Organic Spices, Grains & Traditional Indian Food</p>
+            <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+                <button onclick="window.location.href='#products'" style="padding: 17px 42px; background: white; color: #333; border: none; border-radius: 50px; font-weight: 600; font-size: 1.05rem; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">Shop Organic</button>
+                <button onclick="window.location.href='#products'" style="padding: 17px 42px; background: transparent; color: white; border: 3px solid white; border-radius: 50px; font-weight: 600; font-size: 1.05rem; cursor: pointer; transition: all 0.3s;">View Spices</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Grocery Products -->
+    <section id="products" class="products">
+        <div class="container">
+            <div class="products-header">
+                <h2 class="section-title">Grocery Products</h2>
+                <div class="filters">
+                    <select id="sortFilter" onchange="sortProducts()">
+                        <option value="newest">Newest First</option>
+                        <option value="priceLow">Price: Low to High</option>
+                        <option value="priceHigh">Price: High to Low</option>
+                        <option value="rating">Highest Rated</option>
+                    </select>
+                </div>
+            </div>
+            <div class="product-grid" id="productGrid"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <span class="logo-icon">🛒</span>
+                        <div>
+                            <h3>DesiMart</h3>
+                            <p>Har Ghar Ki Desi Pehchaan</p>
+                        </div>
+                    </div>
+                    <p>India's trusted marketplace supporting local sellers and promoting authentic desi products.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 DesiMart. All rights reserved. Made with ❤️ in India</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart & Wishlist Sidebars -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Shopping Cart</h3>
+            <button onclick="toggleCart()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <strong>Total: ₹<span id="cartTotal">0</span></strong>
+            </div>
+            <button class="btn btn-primary" onclick="checkout()">Checkout</button>
+        </div>
+    </div>
+
+    <div class="wishlist-sidebar" id="wishlistSidebar">
+        <div class="wishlist-header">
+            <h3>My Wishlist</h3>
+            <button onclick="toggleWishlist()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="wishlist-items" id="wishlistItems"></div>
+    </div>
+
+    <!-- Product Modal -->
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span id="toastMessage"></span>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const navMenu = document.getElementById('navMenu');
+            const mobileBtn = document.querySelector('.mobile-menu-btn');
+            const body = document.body;
+            
+            navMenu.classList.toggle('active');
+            
+            const icon = mobileBtn.querySelector('i');
+            if (navMenu.classList.contains('active')) {
+                icon.className = 'fas fa-times';
+                body.style.overflow = 'hidden';
+            } else {
+                icon.className = 'fas fa-bars';
+                body.style.overflow = 'auto';
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    const navMenu = document.getElementById('navMenu');
+                    const mobileBtn = document.querySelector('.mobile-menu-btn');
+                    navMenu.classList.remove('active');
+                    const icon = mobileBtn.querySelector('i');
+                    icon.className = 'fas fa-bars';
+                    document.body.style.overflow = 'auto';
+                });
+            });
+        });
+        
+        // Grocery Products Data
+        const groceryProducts = [
+            {
+                id: 201,
+                name: "Organic Turmeric Powder",
+                price: 299,
+                originalPrice: 399,
+                category: "Grocery",
+                image: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=400",
+                rating: 4.6,
+                reviews: 89,
+                description: "Pure organic turmeric powder from Kerala farms",
+                brand: "Desi Organic",
+                seller: "Kerala Spice House",
+                inStock: true
+            },
+            {
+                id: 202,
+                name: "Basmati Rice (5kg)",
+                price: 899,
+                originalPrice: 1199,
+                category: "Grocery",
+                image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400",
+                rating: 4.7,
+                reviews: 234,
+                description: "Premium aged basmati rice from Punjab",
+                brand: "Golden Grain",
+                seller: "Rice Valley",
+                inStock: true
+            },
+            {
+                id: 203,
+                name: "Cold Pressed Coconut Oil",
+                price: 449,
+                originalPrice: 599,
+                category: "Grocery",
+                image: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=400",
+                rating: 4.5,
+                reviews: 156,
+                description: "Pure cold pressed coconut oil from Kerala",
+                brand: "Coconut King",
+                seller: "South Oils",
+                inStock: true
+            },
+            {
+                id: 204,
+                name: "Garam Masala Powder",
+                price: 199,
+                originalPrice: 299,
+                category: "Grocery",
+                image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=400",
+                rating: 4.8,
+                reviews: 178,
+                description: "Authentic garam masala blend with whole spices",
+                brand: "Spice Garden",
+                seller: "Masala House",
+                inStock: true
+            },
+            {
+                id: 205,
+                name: "Organic Jaggery (Gud)",
+                price: 149,
+                originalPrice: 199,
+                category: "Grocery",
+                image: "https://images.unsplash.com/photo-1609501676725-7186f0b5c4f8?w=400",
+                rating: 4.4,
+                reviews: 92,
+                description: "Pure organic jaggery from sugarcane",
+                brand: "Sweet Earth",
+                seller: "Natural Sweets",
+                inStock: true
+            },
+            {
+                id: 206,
+                name: "Ayurvedic Tea Blend",
+                price: 349,
+                originalPrice: 449,
+                category: "Grocery",
+                image: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=400",
+                rating: 4.3,
+                reviews: 67,
+                description: "Herbal tea blend with tulsi and ginger",
+                brand: "Ayur Tea",
+                seller: "Herbal India",
+                inStock: true
+            }
+        ];
+
+        // Set current products to grocery
+        let products = groceryProducts;
+        let filteredProducts = [...products];
+    </script>
+    <script src="js/mobile-menu.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

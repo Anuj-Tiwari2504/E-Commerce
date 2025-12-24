@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DesiMart - Har Ghar Ki Desi Pehchaan | Authentic Indian Products</title>
+    <meta name="description" content="DesiMart - India's trusted marketplace for authentic desi products. Shop from local sellers, artisans and Indian brands.">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar" style="position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; transition: all 0.3s ease; background: rgba(0,0,0,0.1); backdrop-filter: blur(10px);">
+        <div class="nav-container">
+            <div class="nav-menu" id="navMenu">
+                <a href="fashion.html" class="nav-link">Fashion</a>
+                <a href="grocery.html" class="nav-link">Grocery</a>
+                <a href="electronics.html" class="nav-link">Electronics</a>
+                <a href="handicraft.html" class="nav-link">Handicraft</a>
+                
+                <div class="mobile-social-section">
+                    <div class="mobile-social-icons">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                    <div class="mobile-contact-info">
+                        <p><i class="fas fa-phone"></i> +91 1800-123-4567</p>
+                        <p><i class="fas fa-envelope"></i> support@desimart.com</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="nav-logo">
+                <a href="index.html" class="logo-link">
+                    <span class="logo-icon">🛒</span>
+                    <div class="logo-text">
+                        <h1>DesiMart</h1>
+                        <span class="logo-tagline">Har Ghar Ki Desi Pehchaan</span>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="nav-icons">
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Search products..." onkeyup="searchProducts(event)">
+                    <button class="search-btn" onclick="performSearch()">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <button class="nav-icon" onclick="toggleWishlist()">
+                    <i class="fas fa-heart"></i>
+                    <span class="badge" id="wishlistCount">0</span>
+                </button>
+                <button class="nav-icon" onclick="toggleCart()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="badge" id="cartCount">0</span>
+                </button>
+                <button class="nav-icon" onclick="toggleAccount()">
+                    <i class="fas fa-user"></i>
+                </button>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const navMenu = document.getElementById('navMenu');
+            const mobileBtn = document.querySelector('.mobile-menu-btn');
+            const body = document.body;
+            
+            navMenu.classList.toggle('active');
+            
+            // Change hamburger icon
+            const icon = mobileBtn.querySelector('i');
+            if (navMenu.classList.contains('active')) {
+                icon.className = 'fas fa-times';
+                body.style.overflow = 'hidden'; // Prevent background scroll
+            } else {
+                icon.className = 'fas fa-bars';
+                body.style.overflow = 'auto'; // Allow background scroll
+            }
+        }
+        
+        // Close menu when clicking on links
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const mobileBtn = document.querySelector('.mobile-menu-btn');
+            const body = document.body;
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    const navMenu = document.getElementById('navMenu');
+                    navMenu.classList.remove('active');
+                    const icon = mobileBtn.querySelector('i');
+                    icon.className = 'fas fa-bars';
+                    body.style.overflow = 'auto';
+                });
+            });
+        });
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                // Scrolled down - solid background
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                navbar.style.backdropFilter = 'blur(10px)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            } else {
+                // At top - transparent background
+                navbar.style.background = 'rgba(0,0,0,0.1)';
+                navbar.style.backdropFilter = 'blur(10px)';
+                navbar.style.boxShadow = 'none';
+            }
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navMenu = document.getElementById('navMenu');
+            const mobileBtn = document.querySelector('.mobile-menu-btn');
+            const navbar = document.querySelector('.navbar');
+            const body = document.body;
+            
+            if (!navbar.contains(event.target) && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                const icon = mobileBtn.querySelector('i');
+                icon.className = 'fas fa-bars';
+                body.style.overflow = 'auto';
+            }
+        });
+        
+        // Close mobile menu when window is resized
+        window.addEventListener('resize', function() {
+            const navMenu = document.getElementById('navMenu');
+            const mobileBtn = document.querySelector('.mobile-menu-btn');
+            const body = document.body;
+            
+            if (window.innerWidth > 768) {
+                navMenu.classList.remove('active');
+                const icon = mobileBtn.querySelector('i');
+                icon.className = 'fas fa-bars';
+                body.style.overflow = 'auto';
+            }
+        });
+    </script>
+
+
+
+    <!-- Hero Section -->
+    <section id="home" class="hero" style="position: relative; min-height: 65vh; display: flex; align-items: center; overflow: hidden;">
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('images/Hero.jpg') center/cover no-repeat; background-size: cover; z-index: 1;"></div>
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(0,0,0,0.4), rgba(255,153,51,0.15)); z-index: 2;"></div>
+        <div class="container" style="position: relative; z-index: 3; text-align: center; color: white; margin-top: -100px;">
+            <h1 style="font-size: 4.5rem; font-weight: 700; margin-bottom: 2rem; text-shadow: 4px 4px 8px rgba(0,0,0,0.8); line-height: 1.1;">
+                <span style="background: linear-gradient(135deg, #FFD700, #FFA500, #FF6347); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-shadow: none; filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));">DesiMart</span> 
+                <span style="background: linear-gradient(135deg, #32CD32, #228B22, #006400); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-shadow: none; filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5)); font-size: 3.5rem;">- Har Ghar Ki Desi Pehchaan</span>
+            </h1>
+            
+            <p style="font-size: 1.8rem; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.7); font-weight: 700; max-width: 800px; margin-left: auto; margin-right: auto;">
+                🛍️ <strong>Swadeshi Se Swabhiman Tak</strong> - Authentic Indian Products Direct from Local Artisans
+            </p>
+            
+            <p style="font-size: 1.2rem; margin-bottom: 3rem; opacity: 0.9; max-width: 600px; margin-left: auto; margin-right: auto;">
+                ✨ Premium Quality | 🚚 Fast Delivery | 💯 100% Authentic | 🤝 Supporting Local Business
+            </p>
+            
+            <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem;">
+                <button onclick="window.location.href='#products'" style="padding: 18px 40px; background: linear-gradient(135deg, #00BFFF, #1E90FF); color: white; border: none; border-radius: 50px; font-weight: 600; font-size: 1.1rem; cursor: pointer; transition: all 0.3s; box-shadow: 0 8px 25px rgba(30,144,255,0.4); transform: translateY(0);" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 12px 35px rgba(30,144,255,0.6)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 25px rgba(30,144,255,0.4)'">
+                    🛒 Shop Now
+                </button>
+                <button onclick="window.location.href='#categories'" style="padding: 18px 40px; background: transparent; color: white; border: 3px solid white; border-radius: 50px; font-weight: 600; font-size: 1.1rem; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='white'; this.style.color='#333'" onmouseout="this.style.background='transparent'; this.style.color='white'">
+                    📂 Explore Categories
+                </button>
+            </div>
+            
+            <div style="display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; margin-top: 2rem;">
+                <div style="text-align: center; animation: fadeInUp 1s ease-out 0.5s both;">
+                    <div style="font-size: 2rem; font-weight: 900; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">10K+</div>
+                    <div style="font-size: 0.8rem; font-weight: 900; color: white; opacity: 0.9; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">Happy Customers</div>
+                </div>
+                <div style="text-align: center; animation: fadeInUp 1s ease-out 0.7s both;">
+                    <div style="font-size: 2rem; font-weight: 900; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">500+</div>
+                    <div style="font-size: 0.8rem; font-weight: 900; color: white; opacity: 0.9; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">Local Sellers</div>
+                </div>
+                <div style="text-align: center; animation: fadeInUp 1s ease-out 0.9s both;">
+                    <div style="font-size: 2rem; font-weight: 900; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">5K+</div>
+                    <div style="font-size: 0.8rem; font-weight: 900; color: white; opacity: 0.9; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">Products</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Floating Elements -->
+        <div style="position: absolute; top: 20%; left: 10%; animation: float 3s ease-in-out infinite; font-size: 2rem; opacity: 0.7;">🪔</div>
+        <div style="position: absolute; top: 30%; right: 15%; animation: float 4s ease-in-out infinite reverse; font-size: 2rem; opacity: 0.7;">🎨</div>
+        <div style="position: absolute; bottom: 30%; left: 15%; animation: float 3.5s ease-in-out infinite; font-size: 2rem; opacity: 0.7;">🛍️</div>
+        <div style="position: absolute; bottom: 20%; right: 10%; animation: float 4.5s ease-in-out infinite reverse; font-size: 2rem; opacity: 0.7;">🇮🇳</div>
+    </section>
+    
+    <style>
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Hero Section Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 60vh !important;
+            }
+            .hero .container {
+                margin-top: -60px !important;
+                padding: 1rem !important;
+            }
+            .hero h1 {
+                font-size: 2.5rem !important;
+            }
+            .hero h1 span:last-child {
+                font-size: 2rem !important;
+            }
+            .hero p:first-of-type {
+                font-size: 1.2rem !important;
+            }
+            .hero p:nth-of-type(2) {
+                font-size: 1rem !important;
+            }
+            .hero button {
+                padding: 14px 28px !important;
+                font-size: 1rem !important;
+            }
+            .hero .statistics {
+                gap: 1.5rem !important;
+                flex-direction: column !important;
+            }
+            .hero .statistics div {
+                margin-bottom: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero {
+                min-height: 50vh !important;
+            }
+            .hero .container {
+                margin-top: -40px !important;
+            }
+            .hero h1 {
+                font-size: 2rem !important;
+            }
+            .hero h1 span:last-child {
+                font-size: 1.5rem !important;
+            }
+            .hero p:first-of-type {
+                font-size: 1rem !important;
+            }
+            .hero p:nth-of-type(2) {
+                font-size: 0.9rem !important;
+            }
+            .hero button {
+                padding: 12px 24px !important;
+                font-size: 0.9rem !important;
+            }
+            .hero .statistics {
+                gap: 1rem !important;
+            }
+            .hero .statistics div div:first-child {
+                font-size: 1.5rem !important;
+            }
+            .hero .statistics div div:last-child {
+                font-size: 0.7rem !important;
+            }
+        }
+    </style>
+
+    <!-- Categories -->
+    <section class="categories">
+        <div class="container">
+            <h2 class="section-title">Shop by Categories</h2>
+            <div class="category-grid">
+                <div class="category-card" onclick="window.location.href='products.html'">
+                    <div class="category-icon">🛍️</div>
+                    <h3>All Products</h3>
+                </div>
+                <div class="category-card" onclick="window.location.href='fashion.html'">
+                    <div class="category-icon">👗</div>
+                    <h3>Fashion</h3>
+                </div>
+                <div class="category-card" onclick="window.location.href='grocery.html'">
+                    <div class="category-icon">🛒</div>
+                    <h3>Grocery</h3>
+                </div>
+                <div class="category-card" onclick="window.location.href='electronics.html'">
+                    <div class="category-icon">📱</div>
+                    <h3>Electronics</h3>
+                </div>
+                <div class="category-card" onclick="window.location.href='home-kitchen.html'">
+                    <div class="category-icon">🏠</div>
+                    <h3>Home & Kitchen</h3>
+                </div>
+                <div class="category-card" onclick="window.location.href='handicraft.html'">
+                    <div class="category-icon">🎨</div>
+                    <h3>Handicraft</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products -->
+    <section id="products" class="products">
+        <div class="container">
+            <div class="products-header">
+                <h2 class="section-title">Top Deals of the Day</h2>
+                <div class="filters">
+                    <select id="categoryFilter" onchange="filterProducts()">
+                        <option value="">All Categories</option>
+                        <option value="Fashion">Fashion</option>
+                        <option value="Grocery">Grocery</option>
+                        <option value="Electronics">Electronics</option>
+                        <option value="Home">Home & Kitchen</option>
+                        <option value="Handicraft">Handicraft</option>
+                    </select>
+                    <select id="sortFilter" onchange="sortProducts()">
+                        <option value="newest">Newest First</option>
+                        <option value="priceLow">Price: Low to High</option>
+                        <option value="priceHigh">Price: High to Low</option>
+                        <option value="rating">Highest Rated</option>
+                    </select>
+                </div>
+            </div>
+            <div class="product-grid" id="productGrid">
+                <!-- Products will be loaded here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Badges -->
+    <section class="trust-badges">
+        <div class="container">
+            <div class="trust-grid">
+                <div class="trust-item">
+                    <div class="trust-icon">🛡️</div>
+                    <h3>100% Secure Payments</h3>
+                    <p>Your payments are protected with bank-level security</p>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-icon">🚚</div>
+                    <h3>Fast Delivery</h3>
+                    <p>Quick delivery across India with real-time tracking</p>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-icon">❤️</div>
+                    <h3>Made in India</h3>
+                    <p>Supporting local artisans and Indian businesses</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email Us</h4>
+                            <p>support@desimart.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Call Us</h4>
+                            <p>+91 1800-123-4567</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-whatsapp"></i>
+                        <div>
+                            <h4>WhatsApp</h4>
+                            <p>+91 9876543210</p>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form" onsubmit="submitForm(event)">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <select required>
+                        <option value="">Select Subject</option>
+                        <option value="order">Order Related</option>
+                        <option value="product">Product Information</option>
+                        <option value="seller">Become a Seller</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <textarea placeholder="Your Message" rows="5" required></textarea>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <span class="logo-icon" style="font-size: 2.5rem; display: flex; align-items: center;">🛒</span>
+                        <div>
+                            <h3>DesiMart</h3>
+                            <p>Har Ghar Ki Desi Pehchaan</p>
+                        </div>
+                    </div>
+                    <p>India's trusted marketplace supporting local sellers and promoting authentic desi products.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#seller">Become a Seller</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Policies</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Return Policy</a></li>
+                        <li><a href="#">Shipping Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 DesiMart. All rights reserved. Made with ❤️ in India</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Shopping Cart</h3>
+            <button onclick="toggleCart()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be loaded here -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <strong>Total: ₹<span id="cartTotal">0</span></strong>
+            </div>
+            <button class="btn btn-primary" onclick="checkout()">Checkout</button>
+        </div>
+    </div>
+
+    <!-- Wishlist Sidebar -->
+    <div class="wishlist-sidebar" id="wishlistSidebar">
+        <div class="wishlist-header">
+            <h3>My Wishlist</h3>
+            <button onclick="toggleWishlist()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="wishlist-items" id="wishlistItems">
+            <!-- Wishlist items will be loaded here -->
+        </div>
+    </div>
+
+    <!-- Product Modal -->
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div class="modal-body" id="modalBody">
+                <!-- Product details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span id="toastMessage"></span>
+    </div>
+
+    <script src="js/mobile-menu.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

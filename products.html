@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - DesiMart | Authentic Indian Products</title>
+    <meta name="description" content="Browse authentic Indian products from local sellers and artisans at DesiMart.">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-icon">🛒</span>
+                <div class="logo-text">
+                    <h1>DesiMart</h1>
+                    <p>Har Ghar Ki Desi Pehchaan</p>
+                </div>
+            </div>
+            
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="products.html" class="nav-link active">Products</a>
+
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+            
+            <div class="nav-icons">
+                <button class="nav-icon" onclick="toggleWishlist()">
+                    <i class="fas fa-heart"></i>
+                    <span class="badge" id="wishlistCount">0</span>
+                </button>
+                <button class="nav-icon" onclick="toggleCart()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="badge" id="cartCount">0</span>
+                </button>
+                <button class="nav-icon" onclick="toggleAccount()">
+                    <i class="fas fa-user"></i>
+                </button>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Products Header -->
+    <section class="page-header" style="position: relative; min-height: 75vh; display: flex; align-items: center; overflow: hidden; background: #000; margin-top: 70px;">
+        <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1920&q=80" alt="All Products" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; z-index: 1; image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges; filter: contrast(1.05) brightness(1.02);">
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(255,153,51,0.4), rgba(19,136,8,0.4)); z-index: 2;"></div>
+        <div class="container" style="position: relative; z-index: 3; text-align: center;">
+            <h1 style="font-size: 4.2rem; font-weight: 700; margin-bottom: 1.5rem; text-shadow: 3px 3px 6px rgba(0,0,0,0.7); letter-spacing: 1px;">🛍️ All Products</h1>
+            <p style="font-size: 1.6rem; margin-bottom: 3rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.7); font-weight: 300; max-width: 600px; margin-left: auto; margin-right: auto;">Discover authentic Indian products from local sellers and artisans</p>
+            <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+                <button onclick="window.location.href='#products'" style="padding: 16px 40px; background: white; color: #333; border: none; border-radius: 50px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">Browse All</button>
+                <button onclick="document.getElementById('categoryFilter').focus()" style="padding: 16px 40px; background: transparent; color: white; border: 3px solid white; border-radius: 50px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.3s;">Filter Products</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products -->
+    <section id="products" class="products">
+        <div class="container">
+            <div class="products-header">
+                <h2 class="section-title">Our Products</h2>
+                <div class="filters">
+                    <select id="categoryFilter" onchange="filterProducts()">
+                        <option value="">All Categories</option>
+                        <option value="Fashion">Fashion</option>
+                        <option value="Grocery">Grocery</option>
+                        <option value="Electronics">Electronics</option>
+                        <option value="Home">Home & Kitchen</option>
+                        <option value="Handicraft">Handicraft</option>
+                    </select>
+                    <select id="sortFilter" onchange="sortProducts()">
+                        <option value="newest">Newest First</option>
+                        <option value="priceLow">Price: Low to High</option>
+                        <option value="priceHigh">Price: High to Low</option>
+                        <option value="rating">Highest Rated</option>
+                    </select>
+                </div>
+            </div>
+            <div class="product-grid" id="productGrid">
+                <!-- Products will be loaded here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <span class="logo-icon">🛒</span>
+                        <div>
+                            <h3>DesiMart</h3>
+                            <p>Har Ghar Ki Desi Pehchaan</p>
+                        </div>
+                    </div>
+                    <p>India's trusted marketplace supporting local sellers and promoting authentic desi products.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="products.html">Products</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li><a href="products.html">Fashion</a></li>
+                        <li><a href="products.html">Grocery</a></li>
+                        <li><a href="products.html">Electronics</a></li>
+                        <li><a href="products.html">Handicraft</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 DesiMart. All rights reserved. Made with ❤️ in India</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Shopping Cart</h3>
+            <button onclick="toggleCart()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <strong>Total: ₹<span id="cartTotal">0</span></strong>
+            </div>
+            <button class="btn btn-primary" onclick="checkout()">Checkout</button>
+        </div>
+    </div>
+
+    <!-- Wishlist Sidebar -->
+    <div class="wishlist-sidebar" id="wishlistSidebar">
+        <div class="wishlist-header">
+            <h3>My Wishlist</h3>
+            <button onclick="toggleWishlist()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="wishlist-items" id="wishlistItems"></div>
+    </div>
+
+    <!-- Product Modal -->
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span id="toastMessage"></span>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - DesiMart | Get in Touch</title>
+    <meta name="description" content="Contact DesiMart for support, queries, or to become a seller. We're here to help you.">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-icon">🛒</span>
+                <div class="logo-text">
+                    <h1>DesiMart</h1>
+                    <p>Har Ghar Ki Desi Pehchaan</p>
+                </div>
+            </div>
+            
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="products.html" class="nav-link">Products</a>
+
+                <a href="contact.html" class="nav-link active">Contact</a>
+            </div>
+            
+            <div class="nav-icons">
+                <button class="nav-icon" onclick="toggleWishlist()">
+                    <i class="fas fa-heart"></i>
+                    <span class="badge" id="wishlistCount">0</span>
+                </button>
+                <button class="nav-icon" onclick="toggleCart()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="badge" id="cartCount">0</span>
+                </button>
+                <button class="nav-icon" onclick="toggleAccount()">
+                    <i class="fas fa-user"></i>
+                </button>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contact Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Contact Us</h1>
+            <p>We're here to help you with any questions or support you need</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h2 style="margin-bottom: 2rem;">Get in Touch</h2>
+                    <p style="margin-bottom: 2rem; color: var(--gray-600);">Have questions about our products, need help with your order, or want to become a seller? We're here to help! Reach out to us through any of the channels below.</p>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email Us</h4>
+                            <p>support@desimart.com</p>
+                            <p>seller@desimart.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Call Us</h4>
+                            <p>+91 1800-123-4567 (Toll Free)</p>
+                            <p style="font-size: 0.9rem; color: var(--gray-600);">Mon-Sat: 9 AM - 8 PM</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-whatsapp"></i>
+                        <div>
+                            <h4>WhatsApp Support</h4>
+                            <p>+91 9876543210</p>
+                            <a href="https://wa.me/919876543210" target="_blank" class="btn btn-primary" style="margin-top: 0.5rem; display: inline-block; padding: 0.5rem 1rem; font-size: 0.9rem;">
+                                <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Visit Us</h4>
+                            <p>DesiMart Headquarters<br>
+                            123, Business District<br>
+                            Mumbai, Maharashtra 400001<br>
+                            India</p>
+                        </div>
+                    </div>
+
+                    <!-- Business Hours -->
+                    <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-top: 2rem;">
+                        <h4 style="margin-bottom: 1rem;">Business Hours</h4>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span>Monday - Friday</span>
+                            <strong>9:00 AM - 8:00 PM</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span>Saturday</span>
+                            <strong>10:00 AM - 6:00 PM</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Sunday</span>
+                            <strong>Closed</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="contact-form" onsubmit="submitForm(event)">
+                    <h2 style="margin-bottom: 1.5rem;">Send us a Message</h2>
+                    
+                    <input type="text" placeholder="Your Name *" required>
+                    <input type="email" placeholder="Your Email *" required>
+                    <input type="tel" placeholder="Your Phone Number">
+                    
+                    <select required>
+                        <option value="">Select Subject *</option>
+                        <option value="order">Order Related Query</option>
+                        <option value="product">Product Information</option>
+                        <option value="seller">Become a Seller</option>
+                        <option value="technical">Technical Support</option>
+                        <option value="feedback">Feedback & Suggestions</option>
+                        <option value="other">Other</option>
+                    </select>
+                    
+                    <textarea placeholder="Your Message *" rows="5" required></textarea>
+                    
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+
+                    <div style="margin-top: 1rem; padding: 1rem; background: var(--gray-100); border-radius: 8px; font-size: 0.9rem; color: var(--gray-600);">
+                        <strong>Quick Response:</strong> For urgent queries, please use our WhatsApp support or call our helpline. We typically respond to emails within 24 hours.
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section style="padding: 80px 0; background: var(--gray-100);">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="trust-grid">
+                <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                    <h4 style="margin-bottom: 1rem;">How can I track my order?</h4>
+                    <p style="color: var(--gray-600);">You can track your order by logging into your account and visiting the 'My Orders' section. You'll also receive SMS and email updates with tracking information.</p>
+                </div>
+                <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                    <h4 style="margin-bottom: 1rem;">What is your return policy?</h4>
+                    <p style="color: var(--gray-600);">We offer a 7-day return policy for most products. Items must be in original condition with tags attached. Some categories may have different return policies.</p>
+                </div>
+                <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                    <h4 style="margin-bottom: 1rem;">How do I become a seller?</h4>
+                    <p style="color: var(--gray-600);">To become a seller on DesiMart, contact us at seller@desimart.com or use the contact form above. Our team will guide you through the registration process.</p>
+                </div>
+                <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                    <h4 style="margin-bottom: 1rem;">Do you deliver pan-India?</h4>
+                    <p style="color: var(--gray-600);">Yes, we deliver across India. Delivery charges and time may vary based on your location. Free delivery is available on orders above ₹499.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <span class="logo-icon">🛒</span>
+                        <div>
+                            <h3>DesiMart</h3>
+                            <p>Har Ghar Ki Desi Pehchaan</p>
+                        </div>
+                    </div>
+                    <p>India's trusted marketplace supporting local sellers and promoting authentic desi products.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="mailto:support@desimart.com">Email Support</a></li>
+                        <li><a href="https://wa.me/919876543210">WhatsApp</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 DesiMart. All rights reserved. Made with ❤️ in India</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Shopping Cart</h3>
+            <button onclick="toggleCart()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <strong>Total: ₹<span id="cartTotal">0</span></strong>
+            </div>
+            <button class="btn btn-primary" onclick="checkout()">Checkout</button>
+        </div>
+    </div>
+
+    <!-- Wishlist Sidebar -->
+    <div class="wishlist-sidebar" id="wishlistSidebar">
+        <div class="wishlist-header">
+            <h3>My Wishlist</h3>
+            <button onclick="toggleWishlist()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="wishlist-items" id="wishlistItems"></div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span id="toastMessage"></span>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

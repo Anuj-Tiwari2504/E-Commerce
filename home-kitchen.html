@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home & Kitchen - DesiMart | Traditional Home Decor</title>
+    <meta name="description" content="Shop traditional Indian home decor, kitchen items, brass items and home essentials at DesiMart.">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-icon">🛒</span>
+                <div class="logo-text">
+                    <h1>DesiMart</h1>
+                    <p>Har Ghar Ki Desi Pehchaan</p>
+                </div>
+            </div>
+            
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="products.html" class="nav-link">Products</a>
+
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+            
+            <div class="nav-icons">
+                <button class="nav-icon" onclick="toggleWishlist()">
+                    <i class="fas fa-heart"></i>
+                    <span class="badge" id="wishlistCount">0</span>
+                </button>
+                <button class="nav-icon" onclick="toggleCart()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="badge" id="cartCount">0</span>
+                </button>
+                <button class="nav-icon" onclick="toggleAccount()">
+                    <i class="fas fa-user"></i>
+                </button>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home & Kitchen Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>🏠 Home & Kitchen</h1>
+            <p>Traditional Indian Home Decor & Kitchen Essentials</p>
+        </div>
+    </section>
+
+    <!-- Home & Kitchen Products -->
+    <section class="products">
+        <div class="container">
+            <div class="products-header">
+                <h2 class="section-title">Home & Kitchen Products</h2>
+                <div class="filters">
+                    <select id="sortFilter" onchange="sortProducts()">
+                        <option value="newest">Newest First</option>
+                        <option value="priceLow">Price: Low to High</option>
+                        <option value="priceHigh">Price: High to Low</option>
+                        <option value="rating">Highest Rated</option>
+                    </select>
+                </div>
+            </div>
+            <div class="product-grid" id="productGrid"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <span class="logo-icon">🛒</span>
+                        <div>
+                            <h3>DesiMart</h3>
+                            <p>Har Ghar Ki Desi Pehchaan</p>
+                        </div>
+                    </div>
+                    <p>India's trusted marketplace supporting local sellers and promoting authentic desi products.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 DesiMart. All rights reserved. Made with ❤️ in India</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart & Wishlist Sidebars -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Shopping Cart</h3>
+            <button onclick="toggleCart()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <strong>Total: ₹<span id="cartTotal">0</span></strong>
+            </div>
+            <button class="btn btn-primary" onclick="checkout()">Checkout</button>
+        </div>
+    </div>
+
+    <div class="wishlist-sidebar" id="wishlistSidebar">
+        <div class="wishlist-header">
+            <h3>My Wishlist</h3>
+            <button onclick="toggleWishlist()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="wishlist-items" id="wishlistItems"></div>
+    </div>
+
+    <!-- Product Modal -->
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span id="toastMessage"></span>
+    </div>
+
+    <script>
+        // Home & Kitchen Products Data
+        const homeProducts = [
+            {
+                id: 401,
+                name: "Brass Diya Set (Pack of 6)",
+                price: 599,
+                originalPrice: 899,
+                category: "Home",
+                image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400",
+                rating: 4.7,
+                reviews: 67,
+                description: "Traditional brass diyas perfect for festivals",
+                brand: "Desi Decor",
+                seller: "Brass Craft India",
+                inStock: true
+            },
+            {
+                id: 402,
+                name: "Copper Water Bottle",
+                price: 799,
+                originalPrice: 1199,
+                category: "Home",
+                image: "https://images.unsplash.com/photo-1523362628745-0c100150b504?w=400",
+                rating: 4.6,
+                reviews: 156,
+                description: "Pure copper water bottle with health benefits",
+                brand: "Copper Craft",
+                seller: "Wellness Store",
+                inStock: true
+            },
+            {
+                id: 403,
+                name: "Clay Cookware Set",
+                price: 1299,
+                originalPrice: 1899,
+                category: "Home",
+                image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400",
+                rating: 4.5,
+                reviews: 89,
+                description: "Traditional clay pots for healthy cooking",
+                brand: "Earth Kitchen",
+                seller: "Clay Craft",
+                inStock: true
+            },
+            {
+                id: 404,
+                name: "Bamboo Kitchen Set",
+                price: 899,
+                originalPrice: 1299,
+                category: "Home",
+                image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400",
+                rating: 4.4,
+                reviews: 123,
+                description: "Eco-friendly bamboo kitchen utensils",
+                brand: "Green Kitchen",
+                seller: "Eco Store",
+                inStock: true
+            },
+            {
+                id: 405,
+                name: "Wooden Spice Box",
+                price: 649,
+                originalPrice: 899,
+                category: "Home",
+                image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400",
+                rating: 4.8,
+                reviews: 78,
+                description: "Handcrafted wooden spice box with compartments",
+                brand: "Wood Craft",
+                seller: "Kitchen Store",
+                inStock: true
+            },
+            {
+                id: 406,
+                name: "Brass Pooja Thali",
+                price: 449,
+                originalPrice: 699,
+                category: "Home",
+                image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400",
+                rating: 4.9,
+                reviews: 234,
+                description: "Traditional brass pooja thali set",
+                brand: "Divine Brass",
+                seller: "Religious Store",
+                inStock: true
+            }
+        ];
+
+        // Set current products to home
+        let products = homeProducts;
+        let filteredProducts = [...products];
+    </script>
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

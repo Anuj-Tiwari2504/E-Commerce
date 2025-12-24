@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account - DesiMart | Login & Profile</title>
+    <meta name="description" content="Login to your DesiMart account to manage orders, wishlist and profile.">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-icon">🛒</span>
+                <div class="logo-text">
+                    <h1>DesiMart</h1>
+                    <p>Har Ghar Ki Desi Pehchaan</p>
+                </div>
+            </div>
+            
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="products.html" class="nav-link">Products</a>
+
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+            
+            <div class="nav-icons">
+                <button class="nav-icon" onclick="toggleWishlist()">
+                    <i class="fas fa-heart"></i>
+                    <span class="badge" id="wishlistCount">0</span>
+                </button>
+                <button class="nav-icon" onclick="toggleCart()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="badge" id="cartCount">0</span>
+                </button>
+                <button class="nav-icon" onclick="toggleAccount()">
+                    <i class="fas fa-user"></i>
+                </button>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Account Section -->
+    <section class="account-section">
+        <div class="container">
+            <!-- Login/Signup Form -->
+            <div class="auth-container" id="authContainer">
+                <div class="auth-card">
+                    <div class="auth-header">
+                        <div class="auth-icon">👤</div>
+                        <h2 id="authTitle">Welcome Back!</h2>
+                        <p id="authSubtitle">Sign in to your account</p>
+                    </div>
+
+                    <div class="auth-tabs">
+                        <button class="auth-tab active" onclick="switchTab('login')">Login</button>
+                        <button class="auth-tab" onclick="switchTab('signup')">Sign Up</button>
+                    </div>
+
+                    <!-- Login Form -->
+                    <form class="auth-form" id="loginForm" onsubmit="handleLogin(event)">
+                        <input type="email" placeholder="Email Address" required>
+                        <input type="password" placeholder="Password" required>
+                        <button type="submit" class="btn btn-primary">Sign In</button>
+                        <p class="auth-link">Don't have an account? <a href="#" onclick="switchTab('signup')">Sign Up</a></p>
+                    </form>
+
+                    <!-- Signup Form -->
+                    <form class="auth-form hidden" id="signupForm" onsubmit="handleSignup(event)">
+                        <input type="text" placeholder="Full Name" required>
+                        <input type="email" placeholder="Email Address" required>
+                        <input type="tel" placeholder="Phone Number" required>
+                        <input type="password" placeholder="Password" required>
+                        <input type="password" placeholder="Confirm Password" required>
+                        <button type="submit" class="btn btn-primary">Create Account</button>
+                        <p class="auth-link">Already have an account? <a href="#" onclick="switchTab('login')">Sign In</a></p>
+                    </form>
+                </div>
+            </div>
+
+            <!-- User Dashboard -->
+            <div class="dashboard-container hidden" id="dashboardContainer">
+                <div class="dashboard-sidebar">
+                    <div class="user-profile">
+                        <div class="user-avatar" id="userAvatar">U</div>
+                        <div class="user-info">
+                            <h3 id="userName">User Name</h3>
+                            <p id="userEmail">user@email.com</p>
+                        </div>
+                    </div>
+                    
+                    <nav class="dashboard-nav">
+                        <button class="nav-item active" onclick="showSection('profile')">
+                            <i class="fas fa-user"></i> Profile
+                        </button>
+                        <button class="nav-item" onclick="showSection('orders')">
+                            <i class="fas fa-shopping-bag"></i> My Orders
+                        </button>
+                        <button class="nav-item" onclick="showSection('wishlist')">
+                            <i class="fas fa-heart"></i> Wishlist
+                        </button>
+                        <button class="nav-item" onclick="showSection('addresses')">
+                            <i class="fas fa-map-marker-alt"></i> Addresses
+                        </button>
+                        <button class="nav-item logout" onclick="handleLogout()">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </button>
+                    </nav>
+                </div>
+
+                <div class="dashboard-content">
+                    <!-- Profile Section -->
+                    <div class="content-section active" id="profileSection">
+                        <h2>Profile Information</h2>
+                        <form class="profile-form" onsubmit="updateProfile(event)">
+                            <div class="form-row">
+                                <input type="text" id="profileName" placeholder="Full Name" required>
+                                <input type="email" id="profileEmail" placeholder="Email" required>
+                            </div>
+                            <div class="form-row">
+                                <input type="tel" id="profilePhone" placeholder="Phone Number" required>
+                                <input type="date" id="profileDob" placeholder="Date of Birth">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Update Profile</button>
+                        </form>
+                    </div>
+
+                    <!-- Orders Section -->
+                    <div class="content-section" id="ordersSection">
+                        <h2>My Orders</h2>
+                        <div class="orders-list" id="ordersList">
+                            <div class="order-item">
+                                <div class="order-info">
+                                    <h4>Order #DM001</h4>
+                                    <p>Date: 15 Jan 2024</p>
+                                    <p>Items: 3</p>
+                                </div>
+                                <div class="order-status">
+                                    <span class="status delivered">Delivered</span>
+                                    <p class="order-total">₹2,499</p>
+                                </div>
+                            </div>
+                            <div class="order-item">
+                                <div class="order-info">
+                                    <h4>Order #DM002</h4>
+                                    <p>Date: 10 Jan 2024</p>
+                                    <p>Items: 1</p>
+                                </div>
+                                <div class="order-status">
+                                    <span class="status shipped">Shipped</span>
+                                    <p class="order-total">₹1,299</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Wishlist Section -->
+                    <div class="content-section" id="wishlistSection">
+                        <h2>My Wishlist</h2>
+                        <div class="wishlist-grid" id="wishlistGrid">
+                            <!-- Wishlist items will be loaded here -->
+                        </div>
+                    </div>
+
+                    <!-- Addresses Section -->
+                    <div class="content-section" id="addressesSection">
+                        <h2>Saved Addresses</h2>
+                        <button class="btn btn-secondary" onclick="addNewAddress()">Add New Address</button>
+                        <div class="addresses-list" id="addressesList">
+                            <div class="address-item">
+                                <h4>Home</h4>
+                                <p>123, Sample Street<br>Mumbai, Maharashtra 400001</p>
+                                <div class="address-actions">
+                                    <button class="btn-small">Edit</button>
+                                    <button class="btn-small delete">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <span class="logo-icon">🛒</span>
+                        <div>
+                            <h3>DesiMart</h3>
+                            <p>Har Ghar Ki Desi Pehchaan</p>
+                        </div>
+                    </div>
+                    <p>India's trusted marketplace supporting local sellers and promoting authentic desi products.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 DesiMart. All rights reserved. Made with ❤️ in India</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart & Wishlist Sidebars -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Shopping Cart</h3>
+            <button onclick="toggleCart()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <strong>Total: ₹<span id="cartTotal">0</span></strong>
+            </div>
+            <button class="btn btn-primary" onclick="checkout()">Checkout</button>
+        </div>
+    </div>
+
+    <div class="wishlist-sidebar" id="wishlistSidebar">
+        <div class="wishlist-header">
+            <h3>My Wishlist</h3>
+            <button onclick="toggleWishlist()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="wishlist-items" id="wishlistItems"></div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span id="toastMessage"></span>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/account.js"></script>
+</body>
+</html>
