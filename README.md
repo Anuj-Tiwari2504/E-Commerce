@@ -273,7 +273,7 @@ This project is open source and available under the MIT License.
 
 For support and queries:
 - **Email**: support@desimart.com
-- **WhatsApp**: +91 1800-123-4567
+- **WhatsApp**: +91 7217721161
 
 ## 🙏 Acknowledgments
 
